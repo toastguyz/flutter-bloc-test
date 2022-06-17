@@ -1,0 +1,4 @@
+enum ApiCallType {
+  get,
+  post,
+}
