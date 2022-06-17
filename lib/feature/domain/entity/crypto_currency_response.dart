@@ -6,10 +6,8 @@ class CryptoCurrencyResponse {
   CryptoCurrencyResponse({this.message, this.cryptoCurrency});
 
   CryptoCurrencyResponse.fromJson(dynamic json) {
-    // status = json['status'];
+    cryptoCurrency = json != null ? CryptoCurrency.fromJson(json) : null;
     message = json['errorMessage'];
-    cryptoCurrency =
-        json['data'] != null ? CryptoCurrency.fromJson(json['data']) : null;
   }
 }
 

@@ -4,8 +4,7 @@ enum ApiType {
 }
 
 class ApiConstant {
-  static String get baseDomain =>
-      'https://floridaguestdirectoryapi.admindd.com';
+  static String get baseDomain => 'https://www.bitstamp.net/api';
   static String get apiVersion => '/v2/';
 
   static String getValue(ApiType type) {
