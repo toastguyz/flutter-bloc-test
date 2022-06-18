@@ -5,25 +5,21 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../home_screen_data_test.dart';
 
-
 void main() {
   group('Contains currency detail test', () {
-
     testWidgets('Should contains currency detail.',
-            (WidgetTester tester) async {
-          await tester.pumpWidget(
-            _TestWidget(
-              child: CurrencyDetailsContainer(cryptoCurrencyResponse: cryptoCurrencyResponse),
-            ),
-          );
-          final String currency = cryptoCurrencyResponse.cryptoCurrency?.currency ?? '';
+        (WidgetTester tester) async {
+      await tester.pumpWidget(_TestWidget(
+          child: CurrencyDetailsContainer(
+              cryptoCurrencyResponse: cryptoCurrencyResponse)));
+      final String currency =
+          cryptoCurrencyResponse.cryptoCurrency?.currency ?? '';
 
-          expect(find.text(currency), findsOneWidget);
-          expect(find.byType(CurrencyDetailsRow), findsNWidgets(5));
-          expect(find.byType(Column), findsNWidgets(6));
-          expect(find.byType(Row), findsNWidgets(3));
-
-        });
+      expect(find.text(currency), findsOneWidget);
+      expect(find.byType(CurrencyDetailsRow), findsNWidgets(5));
+      expect(find.byType(Column), findsNWidgets(6));
+      expect(find.byType(Row), findsNWidgets(3));
+    });
   });
 }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_title.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-
 void main() {
   group('Order book item title tests', () {
     const String header1 = 'BID PRICE';
@@ -10,20 +9,15 @@ void main() {
     const String header3 = 'ASK PRICE';
 
     testWidgets('Should contains order book item title widget.',
-            (WidgetTester tester) async {
-          await tester.pumpWidget(
-            const _TestWidget(
-              child: OrderBookItemTitle(),
-            ),
-          );
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const _TestWidget(child: OrderBookItemTitle()));
 
-          expect(find.text(header2), findsNWidgets(2));
-          expect(find.text(header3), findsOneWidget);
-          expect(find.text(header1), findsOneWidget);
-          expect(find.byType(Row), findsOneWidget);
-          expect(find.byType(Text), findsNWidgets(4));
-
-        });
+      expect(find.text(header2), findsNWidgets(2));
+      expect(find.text(header3), findsOneWidget);
+      expect(find.text(header1), findsOneWidget);
+      expect(find.byType(Row), findsOneWidget);
+      expect(find.byType(Text), findsNWidgets(4));
+    });
   });
 }
 

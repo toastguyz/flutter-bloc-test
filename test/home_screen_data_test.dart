@@ -1,12 +1,9 @@
 import 'package:flutter_bloc_task/feature/domain/entity/crypto_currency_response.dart';
 
-final CryptoCurrencyResponse cryptoCurrencyResponse =  CryptoCurrencyResponse(
-    status: 200,
-    message: "",
-    cryptoCurrency: cryptoCurrency
-);
+final CryptoCurrencyResponse cryptoCurrencyResponse = CryptoCurrencyResponse(
+    status: 200, message: "", cryptoCurrency: cryptoCurrency);
 
-final CryptoCurrency cryptoCurrency =  CryptoCurrency(
+final CryptoCurrency cryptoCurrency = CryptoCurrency(
   high: "21191.44",
   last: "19425.97",
   timestamp: "1655548348",

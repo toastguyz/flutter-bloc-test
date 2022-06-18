@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_row.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 
 void main() {
   group('Order book row item widget tests', () {
-
     testWidgets('Should contains order book row item widget.',
-            (WidgetTester tester) async {
-          await tester.pumpWidget(
-            const _TestWidget(
-              child: OrderBookItemRow(),
-            ),
-          );
+        (WidgetTester tester) async {
+      // await tester.pumpWidget(const _TestWidget(child: OrderBookItemRow()));
 
-          expect(find.text("0.075000000000"), findsNWidgets(2));
-          expect(find.text("23109.93"), findsOneWidget);
-          expect(find.byType(Row), findsOneWidget);
-          expect(find.byType(Text), findsNWidgets(4));
-
-        });
+      expect(find.text("0.075000000000"), findsNWidgets(2));
+      expect(find.text("23109.93"), findsOneWidget);
+      expect(find.byType(Row), findsOneWidget);
+      expect(find.byType(Text), findsNWidgets(4));
+    });
   });
 }
 
