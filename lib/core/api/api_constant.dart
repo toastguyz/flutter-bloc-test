@@ -1,7 +1,4 @@
-enum ApiType {
-  fetchCryptoCurrency,
-  fetchCryptoOrderBook,
-}
+import 'package:flutter_bloc_task/config/enums.dart';
 
 class ApiConstant {
   static String get baseDomain => 'https://www.bitstamp.net/api';

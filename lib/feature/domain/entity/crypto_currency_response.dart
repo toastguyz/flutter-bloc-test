@@ -1,13 +1,15 @@
 class CryptoCurrencyResponse {
-  // int? status;
+  int? status;
   String? message;
   CryptoCurrency? cryptoCurrency;
 
-  CryptoCurrencyResponse({this.message, this.cryptoCurrency});
+  CryptoCurrencyResponse({this.status, this.message, this.cryptoCurrency});
 
-  CryptoCurrencyResponse.fromJson(dynamic json) {
+  CryptoCurrencyResponse.fromJson(dynamic json,
+      {required int statusCode, required String msg}) {
     cryptoCurrency = json != null ? CryptoCurrency.fromJson(json) : null;
-    message = json['errorMessage'];
+    message = msg;
+    status = statusCode;
   }
 }
 
@@ -35,6 +37,7 @@ class CryptoCurrency {
     ask = json['ask'];
     open = json['open'];
   }
+
   String? high;
   String? last;
   String? timestamp;

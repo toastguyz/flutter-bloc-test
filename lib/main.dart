@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
                 primarySwatch: AppColor.colorBlue,
                 fontFamily: AppConstant.fontFamilyLato),
             initialRoute: AppConstant.routeSplashScreen,
+            title: 'Flutter App',
             routes: appRoutes));
   }
 }

@@ -1,4 +1,4 @@
-enum ApiCallType {
-  get,
-  post,
+enum ApiType {
+  fetchCryptoCurrency,
+  fetchCryptoOrderBook,
 }
