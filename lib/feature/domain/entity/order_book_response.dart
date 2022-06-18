@@ -22,10 +22,29 @@ class OrderBookModel {
   });
 
   OrderBookModel.fromJson(dynamic json) {
+    bids = [];
+    if (json['bids'] != null && json['bids'].length > 0) {
+      json['bids'].forEach((element) {
+        List<String> list = [];
+        element.forEach((x) {
+          list.add(x);
+        });
+        bids?.add(list);
+      });
+    }
+
+    asks = [];
+    if (json['asks'] != null && json['asks'].length > 0) {
+      json['asks'].forEach((element) {
+        List<String> list = [];
+        element.forEach((x) {
+          list.add(x);
+        });
+        asks?.add(list);
+      });
+    }
     timestamp = json['timestamp'];
     microtimestamp = json['microtimestamp'];
-    bids = json['bids'] != null ? json['bids'].cast<String>() : [];
-    asks = json['asks'] != null ? json['asks'].cast<String>() : [];
   }
   String? timestamp;
   String? microtimestamp;

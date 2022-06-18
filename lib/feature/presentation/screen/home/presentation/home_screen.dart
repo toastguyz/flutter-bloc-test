@@ -11,6 +11,7 @@ import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/searc
 import 'package:flutter_bloc_task/utils/app_color.dart';
 import 'package:flutter_bloc_task/utils/app_image.dart';
 import 'package:flutter_bloc_task/utils/app_utils.dart';
+import 'package:flutter_bloc_task/widgets/custom_loader.dart';
 import 'package:flutter_bloc_task/widgets/custom_search.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -97,14 +98,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 bloc: _orderBookCubit,
                                 builder: (BuildContext context,
                                     OrderBookState orderBookState) {
-                                  print('orderBookState : ${orderBookState}');
-
                                   return Column(
                                     children: [
                                       Align(
                                           alignment: Alignment.centerRight,
                                           child: orderBookState.isLoading
-                                              ? const CircularProgressIndicator()
+                                              ? const CustomLoader()
                                               : GestureDetector(
                                                   onTap: () {
                                                     _cryptoCubit?.toggleOrderBook(
@@ -127,52 +126,68 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       state.isHidden
                                                           ? "VIEW ORDER BOOK"
                                                           : "HIDE ORDER BOOK",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: AppColor
                                                               .darkPurpleTextColor,
                                                           fontSize: 14,
                                                           fontWeight: FontWeight
                                                               .w600)))),
                                       const SizedBox(height: 20),
-                                      Visibility(
-                                        visible: orderBookState
-                                            is OrderBookLoadedState,
-                                        child: Column(
-                                          children: [
-                                            Text("ORDER BOOK",
-                                                style: TextStyle(
-                                                    color:
-                                                        AppColor.greyTextColor,
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            Card(
-                                              margin: const EdgeInsets.only(
-                                                  top: 4, bottom: 20),
-                                              elevation: 5,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16,
-                                                        vertical: 12),
-                                                child: Column(
-                                                  children: [
-                                                    const OrderBookItemTitle(),
-                                                    const SizedBox(height: 8),
-                                                    ListView.builder(
-                                                        shrinkWrap: true,
-                                                        itemCount: 25,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return const OrderBookItemRow();
-                                                        })
-                                                  ],
+                                      if (orderBookState
+                                          is OrderBookLoadedState)
+                                        Visibility(
+                                          visible: !state.isHidden &&
+                                              !orderBookState.isLoading,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const Text("ORDER BOOK",
+                                                  style: TextStyle(
+                                                      color: AppColor
+                                                          .greyTextColor,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Card(
+                                                margin: const EdgeInsets.only(
+                                                    top: 4, bottom: 20),
+                                                elevation: 5,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 16,
+                                                      vertical: 12),
+                                                  child: Column(
+                                                    children: [
+                                                      const OrderBookItemTitle(),
+                                                      const SizedBox(height: 8),
+                                                      ListView.builder(
+                                                          shrinkWrap: true,
+                                                          itemCount: orderBookState
+                                                                  .orderBookResponse
+                                                                  ?.orderBookModel
+                                                                  ?.bids
+                                                                  ?.length ??
+                                                              0,
+                                                          itemBuilder:
+                                                              (context, index) {
+                                                            final item = orderBookState
+                                                                    .orderBookResponse
+                                                                    ?.orderBookModel
+                                                                    ?.bids?[index] ??
+                                                                [];
+
+                                                            return OrderBookItemRow(
+                                                                item: item);
+                                                          })
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
+                                              )
+                                            ],
+                                          ),
+                                        )
                                     ],
                                   );
                                 },
@@ -187,8 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return const Scaffold(
-              body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(body: Center(child: CustomLoader()));
         },
       ),
     );

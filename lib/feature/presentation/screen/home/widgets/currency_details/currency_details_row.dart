@@ -16,14 +16,14 @@ class CurrencyDetailsRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(titleName,
-            style: TextStyle(
+            style: const TextStyle(
                 color: AppColor.greyTextColor,
                 fontSize: 12,
                 fontWeight: FontWeight.w400)),
         const SizedBox(height: 4),
         Text(data,
             overflow: TextOverflow.clip,
-            style: TextStyle(
+            style: const TextStyle(
                 color: AppColor.slightTextColor,
                 fontSize: 20,
                 fontWeight: FontWeight.w900))

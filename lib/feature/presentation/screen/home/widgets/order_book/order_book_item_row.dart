@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc_task/utils/app_color.dart';
 
 class OrderBookItemRow extends StatelessWidget {
-  const OrderBookItemRow({Key? key}) : super(key: key);
+  const OrderBookItemRow({required this.item, Key? key}) : super(key: key);
+
+  final List<String> item;
 
   @override
   Widget build(BuildContext context) {
@@ -13,43 +15,43 @@ class OrderBookItemRow extends StatelessWidget {
         children: [
           Expanded(
               flex: 3,
-              child: Text("23109.93",
+              child: Text(item.first,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: AppColor.greyTextColor,
                       fontSize: 10,
                       fontWeight: FontWeight.w400))),
           const SizedBox(width: 4),
           Expanded(
               flex: 4,
-              child: Text("0.075000000000",
+              child: Text(item.last,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: AppColor.greyTextColor,
                       fontSize: 10,
                       fontWeight: FontWeight.w400))),
           const SizedBox(width: 8),
           Expanded(
               flex: 4,
-              child: Text("0.075000000000",
+              child: Text(item.last,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: AppColor.greyTextColor,
                       fontSize: 10,
                       fontWeight: FontWeight.w400))),
           const SizedBox(width: 4),
           Expanded(
               flex: 3,
-              child: Text("23110.93",
+              child: Text(item.first,
                   textAlign: TextAlign.end,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: AppColor.greyTextColor,
                       fontSize: 10,
                       fontWeight: FontWeight.w400)))

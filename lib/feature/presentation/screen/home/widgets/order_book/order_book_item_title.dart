@@ -8,7 +8,7 @@ class OrderBookItemTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
+      children: const [
         Expanded(
             flex: 3,
             child: Text("BID PRICE",
@@ -18,7 +18,7 @@ class OrderBookItemTitle extends StatelessWidget {
                     color: AppColor.greyTextColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w500))),
-        const SizedBox(width: 4),
+        SizedBox(width: 4),
         Expanded(
             flex: 4,
             child: Text("QTY",
@@ -29,7 +29,7 @@ class OrderBookItemTitle extends StatelessWidget {
                     color: AppColor.greyTextColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w500))),
-        const SizedBox(width: 8),
+        SizedBox(width: 8),
         Expanded(
             flex: 4,
             child: Text("QTY",
@@ -40,7 +40,7 @@ class OrderBookItemTitle extends StatelessWidget {
                     color: AppColor.greyTextColor,
                     fontSize: 12,
                     fontWeight: FontWeight.w500))),
-        const SizedBox(width: 4),
+        SizedBox(width: 4),
         Expanded(
             flex: 3,
             child: Text("ASK PRICE",

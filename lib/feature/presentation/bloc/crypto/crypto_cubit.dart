@@ -24,8 +24,6 @@ class CryptoCubit extends Cubit<CryptoState> {
   Future<void> toggleOrderBook(
       CryptoCurrencyResponse cryptoCurrencyResponse, bool isHidden) async {
     emit(CryptoLoadedState(
-      cryptoCurrencyResponse: cryptoCurrencyResponse,
-      isHidden: isHidden,
-    ));
+        cryptoCurrencyResponse: cryptoCurrencyResponse, isHidden: isHidden));
   }
 }

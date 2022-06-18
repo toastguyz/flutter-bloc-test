@@ -20,19 +20,19 @@ class _CustomSearchState extends State<CustomSearch> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: AppColor.searchBarGreyColor,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(4))),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(4))),
       child: Row(
         children: [
           Expanded(
               child: TextFormField(
                   controller: widget.searchController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: "Enter currency pair",
                       hintStyle: TextStyle(color: AppColor.lightTextColor),
-                      border: const UnderlineInputBorder(
-                          borderSide: BorderSide.none)))),
+                      border:
+                          UnderlineInputBorder(borderSide: BorderSide.none)))),
           GestureDetector(
               onTap: widget.onTap,
               child: Image.asset(AppImage.imgSearch,

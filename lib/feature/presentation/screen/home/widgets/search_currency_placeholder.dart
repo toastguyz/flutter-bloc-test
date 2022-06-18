@@ -14,7 +14,7 @@ class SearchCurrencyPlaceholder extends StatelessWidget {
         Image.asset(AppImage.imgSearch,
             height: 150, width: 150, color: AppColor.searchGreyColor),
         const SizedBox(height: 40),
-        Text("Enter a currency pair to load data",
+        const Text("Enter a currency pair to load data",
             style: TextStyle(
                 fontSize: 16,
                 color: AppColor.lightTextColor,
