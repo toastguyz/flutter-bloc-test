@@ -9,7 +9,7 @@ import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/searc
 import 'package:flutter_bloc_task/utils/app_color.dart';
 import 'package:flutter_bloc_task/utils/app_image.dart';
 import 'package:flutter_bloc_task/utils/app_utils.dart';
-import 'package:flutter_bloc_task/widgets/custom_%20search.dart';
+import 'package:flutter_bloc_task/widgets/custom_search.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
