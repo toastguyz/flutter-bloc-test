@@ -9,6 +9,8 @@ class CryptoRepository extends BaseRepository {
     BaseResponse apiResponse =
         await callGETMethod(ApiType.fetchCryptoCurrency, urlParam: currency);
     return CryptoCurrencyResponse.fromJson(apiResponse.json,
-        msg: apiResponse.errMessage, statusCode: apiResponse.status);
+        msg: apiResponse.errMessage,
+        statusCode: apiResponse.status,
+        val: currency);
   }
 }

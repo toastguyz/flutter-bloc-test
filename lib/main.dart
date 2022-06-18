@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_task/feature/domain/repository/crypto_repository.dart';
+import 'package:flutter_bloc_task/feature/domain/repository/order_book_repository.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_cubit.dart';
+import 'package:flutter_bloc_task/feature/presentation/bloc/order_book/order_book_cubit.dart';
 import 'package:flutter_bloc_task/utils/app_color.dart';
 import 'package:flutter_bloc_task/utils/app_constant.dart';
 import 'package:flutter_bloc_task/utils/app_routes.dart';
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
   final CryptoCubit cryptoCubit = CryptoCubit(CryptoRepository());
+  final OrderBookCubit orderBookCubit = OrderBookCubit(OrderBookRepository());
 
   // This widget is the root of your application.
   @override
@@ -38,6 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<CryptoCubit>(create: (_) => cryptoCubit),
+          BlocProvider<OrderBookCubit>(create: (_) => orderBookCubit),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

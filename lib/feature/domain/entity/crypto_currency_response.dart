@@ -6,8 +6,8 @@ class CryptoCurrencyResponse {
   CryptoCurrencyResponse({this.status, this.message, this.cryptoCurrency});
 
   CryptoCurrencyResponse.fromJson(dynamic json,
-      {required int statusCode, required String msg}) {
-    cryptoCurrency = json != null ? CryptoCurrency.fromJson(json) : null;
+      {required int statusCode, required String msg, required String val}) {
+    cryptoCurrency = json != null ? CryptoCurrency.fromJson(json, val) : null;
     message = msg;
     status = statusCode;
   }
@@ -26,7 +26,7 @@ class CryptoCurrency {
     this.open,
   });
 
-  CryptoCurrency.fromJson(dynamic json) {
+  CryptoCurrency.fromJson(dynamic json, String val) {
     high = json['high'];
     last = json['last'];
     timestamp = json['timestamp'];
@@ -36,6 +36,7 @@ class CryptoCurrency {
     low = json['low'];
     ask = json['ask'];
     open = json['open'];
+    currency = val;
   }
 
   String? high;
@@ -47,18 +48,5 @@ class CryptoCurrency {
   String? low;
   String? ask;
   String? open;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['high'] = high;
-    map['last'] = last;
-    map['timestamp'] = timestamp;
-    map['bid'] = bid;
-    map['vwap'] = vwap;
-    map['volume'] = volume;
-    map['low'] = low;
-    map['ask'] = ask;
-    map['open'] = open;
-    return map;
-  }
+  String? currency;
 }

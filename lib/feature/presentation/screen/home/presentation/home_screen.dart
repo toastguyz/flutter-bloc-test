@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_cubit.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_state.dart';
+import 'package:flutter_bloc_task/feature/presentation/bloc/order_book/order_book_cubit.dart';
+import 'package:flutter_bloc_task/feature/presentation/bloc/order_book/order_book_state.dart';
 import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/currency_details/currency_details_container.dart';
 import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_row.dart';
 import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_title.dart';
@@ -21,12 +23,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
   CryptoCubit? _cryptoCubit;
+  OrderBookCubit? _orderBookCubit;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
     _cryptoCubit = BlocProvider.of<CryptoCubit>(context);
+    _orderBookCubit = BlocProvider.of<OrderBookCubit>(context);
   }
 
   @override
@@ -43,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   visible: state is CryptoLoadedState,
                   child: FloatingActionButton(
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         final keyword =
                             searchController.text.toLowerCase().trim();
 
@@ -62,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     CustomSearch(
                         searchController: searchController,
                         onTap: () {
+                          FocusScope.of(context).unfocus();
                           final keyword =
                               searchController.text.toLowerCase().trim();
 
@@ -75,9 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Visibility(
                         visible: state is CryptoInitState,
                         child: const SearchCurrencyPlaceholder()),
-                    Visibility(
-                      visible: state is CryptoLoadedState,
-                      child: Expanded(
+                    if (state is CryptoLoadedState)
+                      Expanded(
                         child: SingleChildScrollView(
                           physics: const BouncingScrollPhysics(),
                           padding: const EdgeInsets.symmetric(
@@ -85,62 +90,97 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const CurrencyDetailsContainer(),
-                              Align(
-                                  alignment: Alignment.centerRight,
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        // isView = !isView;
-                                        // setState(() {});
-                                      },
-                                      child: Text(
-                                          // isView
-                                          true
-                                              ? "HIDE ORDER BOOK"
-                                              : "VIEW ORDER BOOK",
-                                          style: TextStyle(
-                                              color:
-                                                  AppColor.darkPurpleTextColor,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600)))),
-                              const SizedBox(height: 20),
-                              Visibility(
-                                  // visible: isView,
-                                  child: Text("ORDER BOOK",
-                                      style: TextStyle(
-                                          color: AppColor.greyTextColor,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold))),
-                              Visibility(
-                                // visible: isView,
-                                visible: true,
-                                child: Card(
-                                  margin:
-                                      const EdgeInsets.only(top: 4, bottom: 20),
-                                  elevation: 5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 12),
-                                    child: Column(
-                                      children: [
-                                        const OrderBookItemTitle(),
-                                        const SizedBox(height: 8),
-                                        ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: 25,
-                                            itemBuilder: (context, index) {
-                                              return const OrderBookItemRow();
-                                            })
-                                      ],
-                                    ),
-                                  ),
-                                ),
+                              CurrencyDetailsContainer(
+                                  cryptoCurrencyResponse:
+                                      state.cryptoCurrencyResponse),
+                              BlocBuilder<OrderBookCubit, OrderBookState>(
+                                bloc: _orderBookCubit,
+                                builder: (BuildContext context,
+                                    OrderBookState orderBookState) {
+                                  print('orderBookState : ${orderBookState}');
+
+                                  return Column(
+                                    children: [
+                                      Align(
+                                          alignment: Alignment.centerRight,
+                                          child: orderBookState.isLoading
+                                              ? const CircularProgressIndicator()
+                                              : GestureDetector(
+                                                  onTap: () {
+                                                    _cryptoCubit?.toggleOrderBook(
+                                                        state
+                                                            .cryptoCurrencyResponse,
+                                                        !state.isHidden);
+                                                    if (state.isHidden) {
+                                                      _orderBookCubit
+                                                          ?.fetchOrderBook(
+                                                              searchController
+                                                                  .text
+                                                                  .toLowerCase()
+                                                                  .trim());
+                                                    } else {
+                                                      _orderBookCubit
+                                                          ?.toggleOrderBook();
+                                                    }
+                                                  },
+                                                  child: Text(
+                                                      state.isHidden
+                                                          ? "VIEW ORDER BOOK"
+                                                          : "HIDE ORDER BOOK",
+                                                      style: TextStyle(
+                                                          color: AppColor
+                                                              .darkPurpleTextColor,
+                                                          fontSize: 14,
+                                                          fontWeight: FontWeight
+                                                              .w600)))),
+                                      const SizedBox(height: 20),
+                                      Visibility(
+                                        visible: orderBookState
+                                            is OrderBookLoadedState,
+                                        child: Column(
+                                          children: [
+                                            Text("ORDER BOOK",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColor.greyTextColor,
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            Card(
+                                              margin: const EdgeInsets.only(
+                                                  top: 4, bottom: 20),
+                                              elevation: 5,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 16,
+                                                        vertical: 12),
+                                                child: Column(
+                                                  children: [
+                                                    const OrderBookItemTitle(),
+                                                    const SizedBox(height: 8),
+                                                    ListView.builder(
+                                                        shrinkWrap: true,
+                                                        itemCount: 25,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return const OrderBookItemRow();
+                                                        })
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                },
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),

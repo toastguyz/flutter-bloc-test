@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_task/feature/domain/entity/crypto_currency_response.dart';
 import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/currency_details/currency_details_row.dart';
 import 'package:flutter_bloc_task/utils/app_color.dart';
 
 class CurrencyDetailsContainer extends StatelessWidget {
-  const CurrencyDetailsContainer({Key? key}) : super(key: key);
+  const CurrencyDetailsContainer(
+      {required this.cryptoCurrencyResponse, Key? key})
+      : super(key: key);
+
+  final CryptoCurrencyResponse cryptoCurrencyResponse;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class CurrencyDetailsContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("BTCUSD",
+            Text(cryptoCurrencyResponse.cryptoCurrency?.currency ?? '',
                 style: TextStyle(
                     color: AppColor.darkTextColor,
                     fontSize: 32,
@@ -28,29 +33,39 @@ class CurrencyDetailsContainer extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Row(
-          children: const [
+          children: [
             Expanded(
-                child:
-                    CurrencyDetailsRow(titleName: "OPEN", data: "\$ 23,142.0")),
+                child: CurrencyDetailsRow(
+                    titleName: 'OPEN',
+                    data:
+                        '\$ ${cryptoCurrencyResponse.cryptoCurrency?.open ?? '0.0'}')),
             Expanded(
-                child:
-                    CurrencyDetailsRow(titleName: "HIGH", data: "\$ 23,142.0")),
+                child: CurrencyDetailsRow(
+                    titleName: 'HIGH',
+                    data:
+                        '\$ ${cryptoCurrencyResponse.cryptoCurrency?.high ?? '0.0'}')),
           ],
         ),
         const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             Expanded(
-                child:
-                    CurrencyDetailsRow(titleName: "LOW", data: "\$ 23,142.0")),
+                child: CurrencyDetailsRow(
+                    titleName: 'LOW',
+                    data:
+                        '\$ ${cryptoCurrencyResponse.cryptoCurrency?.low ?? '0.0'}')),
             Expanded(
-                child:
-                    CurrencyDetailsRow(titleName: "LAST", data: "\$ 23,142.0")),
+                child: CurrencyDetailsRow(
+                    titleName: 'LAST',
+                    data:
+                        '\$ ${cryptoCurrencyResponse.cryptoCurrency?.last ?? '0.0'}')),
           ],
         ),
         const SizedBox(height: 16),
-        const CurrencyDetailsRow(titleName: "Volume", data: "23,142.0"),
+        CurrencyDetailsRow(
+            titleName: 'Volume',
+            data: cryptoCurrencyResponse.cryptoCurrency?.open ?? '0.0'),
         const SizedBox(height: 20),
       ],
     );
