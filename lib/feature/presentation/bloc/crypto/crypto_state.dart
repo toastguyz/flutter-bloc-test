@@ -4,28 +4,18 @@ abstract class CryptoState {
   const CryptoState();
 }
 
-class CryptoInitState extends CryptoState {
-  @override
-  List<Object> get props => [];
-}
+class CryptoInitState extends CryptoState {}
 
-class CryptoLoadingState extends CryptoState {
-  @override
-  List<Object> get props => [];
-}
+class CryptoLoadingState extends CryptoState {}
 
 class CryptoLoadedState extends CryptoState {
   final CryptoCurrencyResponse cryptoCurrencyResponse;
-  CryptoLoadedState({required this.cryptoCurrencyResponse});
 
-  @override
-  List<Object> get props => [];
+  CryptoLoadedState({required this.cryptoCurrencyResponse});
 }
 
 class CryptoErrorState extends CryptoState {
   final String error;
-  CryptoErrorState({required this.error});
 
-  @override
-  List<Object> get props => [];
+  CryptoErrorState({required this.error});
 }
