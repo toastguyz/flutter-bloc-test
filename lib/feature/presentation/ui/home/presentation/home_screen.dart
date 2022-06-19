@@ -4,10 +4,10 @@ import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_cubit.
 import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_state.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/order_book/order_book_cubit.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/order_book/order_book_state.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/currency_details/currency_details_container.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_row.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_title.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/search_currency_placeholder.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/currency_details/currency_details_container.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/order_book/order_book_item_row.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/order_book/order_book_item_title.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/search_currency_placeholder.dart';
 import 'package:flutter_bloc_task/utils/app_color.dart';
 import 'package:flutter_bloc_task/utils/app_image.dart';
 import 'package:flutter_bloc_task/utils/app_utils.dart';

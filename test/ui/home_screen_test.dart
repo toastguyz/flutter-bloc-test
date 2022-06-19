@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_cubit.dart';
 import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_state.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/presentation/home_screen.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/presentation/home_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../home_screen_data_test.dart';
@@ -26,8 +26,7 @@ void main() {
       // mockCryptoCubit = BlocProvider.of<CryptoCubit>();
     });
 
-    testWidgets('Should contains home screen widget.',
-        (WidgetTester tester) async {
+    testWidgets('Should contains home ui widget.', (WidgetTester tester) async {
       await tester.pumpWidget(
         const _TestWidget(
           child: HomeScreen(),

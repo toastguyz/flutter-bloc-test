@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/currency_details/currency_details_row.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/currency_details/currency_details_row.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/splash_screen.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/splash_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

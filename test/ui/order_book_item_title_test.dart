@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_task/feature/presentation/screen/home/widgets/order_book/order_book_item_title.dart';
+import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/order_book/order_book_item_title.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
