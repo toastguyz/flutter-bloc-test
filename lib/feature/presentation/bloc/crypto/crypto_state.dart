@@ -1,21 +1,25 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc_task/feature/domain/entity/crypto_currency_response.dart';
 
-abstract class CryptoState {
+class CryptoState extends Equatable {
   const CryptoState({this.isHidden = true});
 
   final bool isHidden;
+
+  @override
+  List<Object?> get props => [];
 }
 
 class CryptoInitState extends CryptoState {
-  CryptoInitState() : super();
+  const CryptoInitState() : super();
 }
 
 class CryptoLoadingState extends CryptoState {
-  CryptoLoadingState() : super();
+  const CryptoLoadingState() : super();
 }
 
 class CryptoLoadedState extends CryptoState {
-  CryptoLoadedState(
+  const CryptoLoadedState(
       {required this.cryptoCurrencyResponse, required this.isHidden})
       : super(isHidden: isHidden);
 
@@ -29,5 +33,5 @@ class CryptoLoadedState extends CryptoState {
 class CryptoErrorState extends CryptoState {
   final String error;
 
-  CryptoErrorState({required this.error}) : super();
+  const CryptoErrorState({required this.error}) : super();
 }

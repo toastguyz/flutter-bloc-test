@@ -6,11 +6,11 @@ import 'package:flutter_bloc_task/feature/presentation/bloc/crypto/crypto_state.
 class CryptoCubit extends Cubit<CryptoState> {
   final CryptoRepository _cryptoRepository;
 
-  CryptoCubit(this._cryptoRepository) : super(CryptoInitState());
+  CryptoCubit(this._cryptoRepository) : super(const CryptoInitState());
 
   Future<void> fetchCryptoCurrency(String currency) async {
     try {
-      emit(CryptoLoadingState());
+      emit(const CryptoLoadingState());
       CryptoCurrencyResponse cryptoCurrencyResponse = await _cryptoRepository
           .fetchCryptoCurrencyConversion(currency: currency);
 

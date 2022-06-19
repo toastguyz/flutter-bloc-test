@@ -3,7 +3,7 @@ import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/currency_
 import 'package:flutter_bloc_task/feature/presentation/ui/home/widgets/currency_details/currency_details_row.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../home_screen_data_test.dart';
+import '../../../../helpers/home_cubit_data_helper.dart';
 
 void main() {
   group('Contains currency detail test', () {
@@ -11,9 +11,9 @@ void main() {
         (WidgetTester tester) async {
       await tester.pumpWidget(_TestWidget(
           child: CurrencyDetailsContainer(
-              cryptoCurrencyResponse: cryptoCurrencyResponse)));
+              cryptoCurrencyResponse: cryptoCurrencyResponseData)));
       final String currency =
-          cryptoCurrencyResponse.cryptoCurrency?.currency ?? '';
+          cryptoCurrencyResponseData.cryptoCurrency?.currency ?? '';
 
       expect(find.text(currency), findsOneWidget);
       expect(find.byType(CurrencyDetailsRow), findsNWidgets(5));

@@ -14,17 +14,17 @@ class CryptoCurrencyResponse {
 }
 
 class CryptoCurrency {
-  CryptoCurrency({
-    this.high,
-    this.last,
-    this.timestamp,
-    this.bid,
-    this.vwap,
-    this.volume,
-    this.low,
-    this.ask,
-    this.open,
-  });
+  CryptoCurrency(
+      {this.high,
+      this.last,
+      this.timestamp,
+      this.bid,
+      this.vwap,
+      this.volume,
+      this.low,
+      this.ask,
+      this.open,
+      this.currency});
 
   CryptoCurrency.fromJson(dynamic json, String val) {
     high = json['high'];
